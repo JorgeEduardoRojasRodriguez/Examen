@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Contactos extends Model
+{
+    use HasFactory;
+    protected $fillable = ['nombre', 'apellido_paterno', 'apellido_materno', 'created_at', 'updated_at'];
+
+    public function telefonos()
+    {
+        return $this->hasMany(Telefonos::class);
+    }
+
+    public function emails()
+    {
+        return $this->hasMany(Emails::class);
+    }
+
+    public function direcciones()
+    {
+        return $this->hasMany(Direcciones::class);
+    }
+}
