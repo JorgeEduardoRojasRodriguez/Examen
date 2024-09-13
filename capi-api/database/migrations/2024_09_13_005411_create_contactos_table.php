@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
+            $table->string('notas')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->string('pagina_web')->nullable();
+            $table->string('empresa')->nullable();
             $table->timestamps();
         });
     }

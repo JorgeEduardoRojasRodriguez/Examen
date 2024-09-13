@@ -20,6 +20,10 @@ class ContactosFactory extends Factory
             'nombre' => fake()->name(),
             'apellido_paterno' => fake()->lastName(),
             'apellido_materno' => fake()->lastName(),
+            'notas' => fake()->sentence(),
+            'fecha_nacimiento' => fake()->date(),
+            'pagina_web' => fake()->url(),
+            'empresa' => fake()->company(),
         ];
     }
 }

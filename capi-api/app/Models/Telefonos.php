@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Telefonos extends Model
 {
     use HasFactory;
-    protected $fillable = ['numero', 'contacto_id', 'created_at', 'updated_at'];
+    protected $fillable = ['telefono', 'contactos_id', 'created_at', 'updated_at'];
 
     public function contacto()
     {

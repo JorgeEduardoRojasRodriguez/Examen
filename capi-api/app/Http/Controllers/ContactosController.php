@@ -3,43 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contactos;
+use App\Repositories\ContactosRepository;
+use App\Http\Controllers\BaseController;
 
-class ContactosController extends Controller
+class ContactosController extends BaseController
 {
-    // generar get, post, put, delete
+    private $contactosRepository;
+
+    public function __construct(ContactosRepository $contactosRepository)
+    {
+        $this->contactosRepository = $contactosRepository;
+    }
+
     public function index()
     {
-        return Contactos::all();
+        return $this->contactosRepository->all();
     }
 
     public function paginate(Request $request)
     {
-        $limit = $request->limit;
-        $offset = $request->offset;
-        return Contactos::limit($limit)->offset($offset)->get();
+        try {
+            $search = $request->search ?? '';
+            $page = $request->page ?? 1;
+            $limit = $request->limit ?? 10;
+            return $this->sendResponse($this->contactosRepository->allPaginated(
+                $page,
+                $limit,
+                $search
+            ), 'Contactos paginados correctamente');
+        } catch (\Exception $e) {
+            return $this->sendError('Error al paginar contactos', $e->getMessage(), 500);
+        }
     }
 
     public function store(Request $request)
     {
-        // agregar validacion de datos
         $request->validate([
             'nombre' => 'required',
             'apellido_paterno' => 'required',
             'apellido_materno' => 'required',
         ]);
-
-        $contacto = new Contactos();
-        $contacto->nombre = $request->nombre;
-        $contacto->apellido_paterno = $request->apellido_paterno;
-        $contacto->apellido_materno = $request->apellido_materno;
-        $contacto->save();
-        return $contacto;
+        try {
+            return $this->sendResponse($this->contactosRepository->create($request->all()), 'Contacto creado correctamente');
+        } catch (\Exception $e) {
+            return $this->sendError('Error al crear contacto', $e->getMessage(), 500);
+        }
     }
 
     public function show($id)
     {
-        return Contactos::find($id);
+        return $this->contactosRepository->find($id);
     }
 
     public function update(Request $request, $id)
@@ -50,20 +63,15 @@ class ContactosController extends Controller
             'apellido_paterno' => 'required',
             'apellido_materno' => 'required',
         ]);
-
-        $contacto = Contactos::find($id);
-        $contacto->nombre = $request->nombre;
-        $contacto->apellido_paterno = $request->apellido_paterno;
-        $contacto->apellido_materno = $request->apellido_materno;
-        $contacto->save();
-        return $contacto;
+        try{
+            return $this->sendResponse($this->contactosRepository->update($id, $request->all()), 'Contacto actualizado correctamente');
+        } catch (\Exception $e) {
+            return $this->sendError('Error al actualizar contacto', $e->getMessage(), 500);
+        }
     }
 
     public function destroy($id)
     {
-        $contacto = Contactos::find($id);
-        $contacto->delete();
-        return $contacto;
+        return $this->contactosRepository->delete($id);
     }
-
 }

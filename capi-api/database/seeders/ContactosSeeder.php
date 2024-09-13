@@ -23,21 +23,21 @@ class ContactosSeeder extends Seeder
             // Se generan 5 telefonos para cada contacto
             for ($j = 0; $j < 5; $j++) {
                 Telefonos::factory()->create([
-                    'contacto_id' => $contacto->id,
+                    'contactos_id' => $contacto->id,
                 ]);
             }
 
             // Se generan 5 emails para cada contacto
             for ($j = 0; $j < 5; $j++) {
                 Emails::factory()->create([
-                    'contacto_id' => $contacto->id,
+                    'contactos_id' => $contacto->id,
                 ]);
             }
 
             // Se generan 5 direcciones para cada contacto
             for ($j = 0; $j < 5; $j++) {
                 Direcciones::factory()->create([
-                    'contacto_id' => $contacto->id,
+                    'contactos_id' => $contacto->id,
                 ]);
             }
         }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Direcciones extends Model
 {
     use HasFactory;
-    protected $fillable = ['calle', 'numero', 'colonia', 'ciudad', 'codigo_postal', 'estado', 'pais', 'contacto_id', 'created_at', 'updated_at'];
+    protected $fillable = ['calle', 'numero', 'colonia', 'ciudad', 'codigo_postal', 'estado', 'pais', 'contactos_id', 'created_at', 'updated_at'];
 
     public function contacto()
     {

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureTokenIsValid
+class EnsureUrlIsValid
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,9 @@ class EnsureTokenIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->input('token') !== 'capi-token') {
-            return response('Unauthorized.', 401);
+        // validar si es localhost:4211
+        if ($request->url() === 'http://localhost:4211') {
+            return response()->json(['error' => 'No se puede acceder a esta URL'], 403);
         }
  
         return $next($request);

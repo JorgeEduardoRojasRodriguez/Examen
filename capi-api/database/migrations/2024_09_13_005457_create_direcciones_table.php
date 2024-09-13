@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
             $table->string('calle');
-            $table->string('numero');
-            $table->string('colonia');
-            $table->string('codigo_postal');
-            $table->string('ciudad');
-            $table->string('estado');
-            $table->string('pais');
-            $table->foreignId('contacto_id')->constrained();
+            $table->string('numero')->nullable();
+            $table->string('colonia')->nullable();
+            $table->string('codigo_postal')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('estado')->nullable();
+            $table->string('pais')->nullable();
+            $table->foreignId('contactos_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
