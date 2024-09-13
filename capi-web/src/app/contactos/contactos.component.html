@@ -1,0 +1,171 @@
+<div class="card">
+  <p-toast />
+  <p-confirmDialog />
+  <div class="flex justify-content-between">
+    <h1>Contactos</h1>
+    <button
+      pButton
+      pRipple
+      label="Agregar contacto"
+      icon="pi pi-plus"
+      class="p-button-rounded p-button-success"
+      (click)="visible = true"
+    ></button>
+  </div>
+
+  <p-table
+    [value]="contactos"
+    selectionMode="single"
+    dataKey="id"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rows]="25"
+    stateStorage="session"
+    stateKey="statedemo-session"
+  >
+    <ng-template pTemplate="caption">
+      <p-iconField iconPosition="left">
+        <p-inputIcon>
+          <i class="pi pi-search"></i>
+        </p-inputIcon>
+        <input
+          pInputText
+          type="text"
+          placeholder="Buscar"
+          [(ngModel)]="query"
+          (ngModelChange)="onQueryChange()"
+        />
+      </p-iconField>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido materno</th>
+        <th>Notas</th>
+        <th>Fecha de nacimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+      <tr>
+        <td>{{ customer.nombre }}</td>
+        <td>{{ customer.apellido_paterno }}</td>
+        <td>{{ customer.apellido_materno }}</td>
+        <td>{{ customer.notas }}</td>
+        <td>{{ customer.fecha_nacimiento }}</td>
+        <td class="flex-iconos">
+          <button
+            pButton
+            pRipple
+            size="small"
+            icon="pi pi-eye"
+            class="p-button-rounded p-button-info"
+            (click)="viewContacto(customer)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            size="small"
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success p-button-sm"
+            (click)="editContacto(customer)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            size="small"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            (click)="deleteContacto(customer.id)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">
+          <div class="p-text-center">
+            <i class="pi pi-search" style="font-size: 2rem"></i>
+            <p>No se encontraron contactos</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="limit"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[10, 20, 30]"
+  />
+
+  <p-dialog
+    [header]="
+      view ? 'Ver contacto' : update ? 'Editar contacto' : 'Agregar contacto'
+    "
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '50%' }"
+  >
+    <div class="flex flex-col gap-2 mt-2">
+      <p-steps
+        [model]="items"
+        [readonly]="false"
+        [activeIndex]="activeIndex"
+        (activeIndexChange)="onActiveIndexChange($event)"
+      />
+
+      <app-datos-personales
+        [contacto]="contacto"
+        *ngIf="activeIndex === 0"
+        [view]="view"
+      ></app-datos-personales>
+
+      <app-telefonos
+        *ngIf="activeIndex === 1"
+        [telefonos]="telefonos"
+        [view]="view"
+      ></app-telefonos>
+
+      <app-emails
+        *ngIf="activeIndex === 2"
+        [emails]="emails"
+        [view]="view"
+      ></app-emails>
+
+      <app-direcciones
+        *ngIf="activeIndex === 3"
+        [direcciones]="direcciones"
+        [view]="view"
+      ></app-direcciones>
+    </div>
+    <div class="flex justify-content-end gap-2 mt-2">
+      <p-button
+        label="Cancelar"
+        severity="secondary"
+        (onClick)="visible = false"
+      />
+      <p-button
+        (onClick)="next()"
+        label="Siguiente"
+        *ngIf="activeIndex !== 3"
+      />
+
+      <p-button
+        (onClick)="
+          view
+            ? (visible = false)
+            : update
+            ? updateContacto()
+            : createContacto()
+        "
+        [label]="view ? 'Aceptar' : update ? 'Actualizar' : 'Guardar'"
+        *ngIf="activeIndex === 3"
+        loadingText="Guardando..."
+        [loading]="loading"
+      />
+    </div>
+  </p-dialog>
+</div>

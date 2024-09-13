@@ -1,0 +1,18 @@
+.flex-direcciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+}
+
+.flex-direcciones p-floatlabel {
+  width: 80%;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+.gap-3 {
+  gap: 1.5rem;
+}

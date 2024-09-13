@@ -1,0 +1,38 @@
+<!-- Agregar boton para poder ir agregando a lista un input de emails -->
+<div class="flex-iconos">
+  <p-confirmDialog />
+  <p-toast />
+  <button
+    pButton
+    pRipple
+    label="Agregar Email"
+    icon="pi pi-plus"
+    class="p-button-rounded p-button-success"
+    (click)="agregaremails()"
+    *ngIf="!view"
+  ></button>
+
+  <div class="flex-emails" *ngFor="let email of emails; let i = index">
+    <p-floatLabel>
+      <input
+        pInputText
+        [(ngModel)]="email.email"
+        placeholder="Email"
+        [required]="true"
+        id="email"
+        [disabled]="view"
+      />
+      <label for="email">Email</label>
+    </p-floatLabel>
+
+    <button
+      pButton
+      pRipple
+      size="small"
+      icon="pi pi-trash"
+      class="p-button-rounded p-button-danger mt-3"
+      (click)="eliminarEmail(email)"
+      *ngIf="!view"
+    ></button>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+<!-- Agregar boton para poder ir agregando a lista un input de direcciones -->
+<div class="flex-iconos">
+  <p-confirmDialog />
+  <p-toast />
+  <button
+    pButton
+    pRipple
+    label="Agregar direcciones"
+    icon="pi pi-plus"
+    class="p-button-rounded p-button-success"
+    (click)="agregarDirecciones()"
+    *ngIf="!view"
+  ></button>
+
+  <div *ngFor="let direccion of direcciones; let i = index">
+    <div class="flex-direcciones gap-3">
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.calle"
+          placeholder="direccion"
+          [required]="true"
+          id="direccion"
+          [disabled]="view"
+        />
+        <label for="direccion">Calle</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.numero"
+          placeholder="direccion"
+          [required]="true"
+          id="numero"
+          [disabled]="view"
+        />
+        <label for="numero">Número</label>
+      </p-floatLabel>
+    </div>
+    <div class="flex-direcciones gap-3">
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.colonia"
+          placeholder="colonia"
+          [required]="true"
+          id="colonia"
+          [disabled]="view"
+        />
+        <label for="colonia">Colonia</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.ciudad"
+          placeholder="ciudad"
+          [required]="true"
+          id="ciudad"
+          [disabled]="view"
+        />
+        <label for="ciudad">Ciudad</label>
+      </p-floatLabel>
+    </div>
+    <div class="flex-direcciones gap-3">
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.codigo_postal"
+          placeholder="codigo_postal"
+          [required]="true"
+          id="codigo_postal"
+          [disabled]="view"
+        />
+        <label for="codigo_postal">Codigo Postal</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.estado"
+          placeholder="estado"
+          [required]="true"
+          id="estado"
+          [disabled]="view"
+        />
+        <label for="estado">Estado</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-direcciones gap-3">
+      <p-floatLabel>
+        <input
+          pInputText
+          [(ngModel)]="direccion.pais"
+          placeholder="pais"
+          [required]="true"
+          id="pais"
+          [disabled]="view"
+        />
+        <label for="pais">Pais</label>
+      </p-floatLabel>
+
+      <button
+        pButton
+        pRipple
+        size="small"
+        icon="pi pi-trash"
+        class="p-button-rounded p-button-danger mt-3"
+        (click)="eliminardirecciones(direccion)"
+        *ngIf="!view"
+      ></button>
+    </div>
+
+    <hr class="mt-3" />
+  </div>
+</div>

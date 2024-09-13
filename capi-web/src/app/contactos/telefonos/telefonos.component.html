@@ -1,0 +1,38 @@
+<!-- Agregar boton para poder ir agregando a lista un input de telefono -->
+<div class="flex-iconos">
+  <p-confirmDialog />
+  <p-toast />
+  <button
+    pButton
+    pRipple
+    label="Agregar telefono"
+    icon="pi pi-plus"
+    class="p-button-rounded p-button-success"
+    (click)="agregarTelefono()"
+    *ngIf="!view"
+  ></button>
+
+  <div class="flex-telefono" *ngFor="let telefono of telefonos; let i = index">
+    <p-floatLabel>
+      <input
+        pInputText
+        [(ngModel)]="telefono.telefono"
+        placeholder="Telefono"
+        [required]="true"
+        id="telefono"
+        [disabled]="view"
+      />
+      <label for="telefono">Telefono</label>
+    </p-floatLabel>
+
+    <button
+      pButton
+      pRipple
+      size="small"
+      icon="pi pi-trash"
+      class="p-button-rounded p-button-danger mt-3"
+      (click)="eliminarTelefono(telefono)"
+      *ngIf="!view"
+    ></button>
+  </div>
+</div>

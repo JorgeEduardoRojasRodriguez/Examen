@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-5 {
+  margin-top: 3rem;
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+.p-float-label {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.p-calendar {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.justify-content-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-inline: 20px;
+}
+
+.gap-2 {
+  gap: 1rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}

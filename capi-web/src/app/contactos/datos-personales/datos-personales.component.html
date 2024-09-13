@@ -1,0 +1,77 @@
+<p-floatLabel>
+  <input
+    pInputText
+    [(ngModel)]="contacto.nombre"
+    placeholder="Nombre"
+    [required]="true"
+    id="nombre"
+    [disabled]="view"
+  />
+  <label for="nombre">Nombre</label>
+</p-floatLabel>
+<p-floatLabel>
+  <input
+    pInputText
+    [(ngModel)]="contacto.apellido_paterno"
+    placeholder="Apellido paterno"
+    [required]="true"
+    id="apellido_paterno"
+    [disabled]="view"
+  />
+  <label for="apellido_paterno">Apellido paterno</label>
+</p-floatLabel>
+<p-floatLabel>
+  <input
+    pInputText
+    [(ngModel)]="contacto.apellido_materno"
+    placeholder="Apellido materno"
+    [required]="true"
+    id="apellido_materno"
+    [disabled]="view"
+  />
+  <label for="apellido_materno">Apellido materno</label>
+</p-floatLabel>
+<p-floatLabel>
+  <input
+    pInputText
+    [(ngModel)]="contacto.notas"
+    placeholder="Notas"
+    [required]="true"
+    id="notas"
+    [disabled]="view"
+  />
+  <label for="notas">Notas</label>
+</p-floatLabel>
+<p-floatLabel>
+  <input
+    pInputText
+    [(ngModel)]="contacto.pagina_web"
+    placeholder="Pagina web"
+    [required]="true"
+    id="pagina_web"
+    [disabled]="view"
+  />
+  <label for="pagina_web">Pagina web</label>
+</p-floatLabel>
+<p-floatLabel>
+  <input
+    pInputText
+    [(ngModel)]="contacto.empresa"
+    placeholder="empresa"
+    [required]="true"
+    id="empresa"
+    [disabled]="view"
+  />
+  <label for="empresa">Empresa</label>
+</p-floatLabel>
+<p-floatLabel>
+  <p-calendar
+    [(ngModel)]="contacto.fecha_nacimiento"
+    placeholder="Fecha de nacimiento"
+    [required]="true"
+    id="fecha_nacimiento"
+    dateFormat="yy-mm-dd"
+    [disabled]="view"
+  ></p-calendar>
+  <label for="fecha_nacimiento">Fecha de nacimiento</label>
+</p-floatLabel>
